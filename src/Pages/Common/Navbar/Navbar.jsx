@@ -18,7 +18,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className={`flex w-full justify-between items-center h-20 px-4 ${staticNavbar ?  'static' : 'absolute' } z-10 ${staticNavbar ?  'text-black ' : 'text-white ' } `}>
+        <div className={`flex w-full justify-between items-center h-20 px-4 ${staticNavbar ?  'static' : 'fixed' } z-10 ${staticNavbar ?  'text-black ' : 'text-white ' } `}>
             <div  >
                 <h1 className={logo ? 'hidden' : 'block'}>NOURISHNET.</h1>
             </div>
