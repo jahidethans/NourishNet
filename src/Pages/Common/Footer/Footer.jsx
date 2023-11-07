@@ -69,6 +69,7 @@ const Footer = () => {
                  <div className="flex items-center"><input type="text" className="border rounded-l-md p-2"/><button className="rounded-l-none p-2">Submit</button></div>
                 </div>
                 </div>
+                
 
                 
                
