@@ -6,6 +6,8 @@ import Register from "../Pages/Register/Register";
 import AddFood from "../Pages/AddFood/AddFood";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
+import SingleFood from "../Pages/SingleFood/SingleFood";
+import ManageMyFoods from "../Pages/ManageMyFoods/ManageMyFoods";
 
 const Routes = createBrowserRouter([
     {
@@ -31,6 +33,15 @@ const Routes = createBrowserRouter([
         {
             path: '/allfoods',
             element: <AvailableFoods></AvailableFoods>
+        },
+        {
+            path: '/allfoods/:id',
+            element: <SingleFood></SingleFood>,
+            loader: ({params})=> fetch(`http://localhost:5000/allfoods/${params.id}`)
+        },
+        {
+            path: '/managemyfoods',
+            element: <ManageMyFoods></ManageMyFoods>
         }
     ]
       },

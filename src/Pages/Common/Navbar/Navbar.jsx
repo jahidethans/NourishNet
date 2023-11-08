@@ -42,7 +42,7 @@ const Navbar = () => {
                 <Link to='/'>Home</Link>
                 <Link to='/allfoods'>Available Foods</Link>
                 <Link to='/addfood'>Add Food</Link>
-                <Link to=''>Manage My Foods</Link>
+                <Link to='/managemyfoods'>Manage My Foods</Link>
                 <Link to=''>My Food Request</Link>
             </ul>
 

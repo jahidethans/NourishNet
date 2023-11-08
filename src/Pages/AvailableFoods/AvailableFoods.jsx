@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const AvailableFoods = () => {
 
@@ -57,11 +58,7 @@ const AvailableFoods = () => {
           />
           <button  className="p-3 border rounded-md">Search</button>
         </form>
-        <div>
-          <button onClick={handleSortByExpiryDate}>
-            Sort by expiry date: {sortByExpiryDate ? <AiOutlineSortAscending className='w-10'></AiOutlineSortAscending> : <AiOutlineSortDescending></AiOutlineSortDescending>}
-          </button>
-        </div>
+        
 
         <div>
         <button onClick={handleSortByExpiryDate}>
@@ -102,7 +99,7 @@ const AvailableFoods = () => {
           <img className="w-10 h-10 rounded-full" src={food.donatorImage} alt="" />
           <p>{food.donatorName}</p>
         </div>
-        <button>View Details</button>
+        <Link to={`/allfoods/${food._id}`}><button>View Details</button></Link>
         </div>
       </card>
     </div>
