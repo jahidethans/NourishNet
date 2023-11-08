@@ -86,9 +86,10 @@ const ManageMyFoods = () => {
               </button>
             </Table.Cell>
             <Table.Cell>
-              <Link to={`/managerequest/${food._id}`} className="p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md">
-              Manage
-              </Link>
+            <Link to={`/allrequests/${food._id}`} className="p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md">
+  Manage
+</Link>
+
             </Table.Cell>
           </Table.Row>
           

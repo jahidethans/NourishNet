@@ -1,6 +1,6 @@
-import  { useContext, useEffect, useState } from "react";
+import  { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Table } from "flowbite-react";
+
 import { useLoaderData } from "react-router-dom";
 
 const ManageSingleFood = () => {
@@ -9,11 +9,13 @@ const ManageSingleFood = () => {
     
     
 
-    const {foods} = useLoaderData();
+    const food = useLoaderData();
     
     
     
-    console.log(`from manage pageee`, foods);
+    console.log(`from manage pageee`, food);
+
+
       return (
           <div>manage this request</div>
       );

@@ -15,47 +15,48 @@ const Routes = createBrowserRouter([
     {
         path: "/",
         element: <Home></Home>,
-        children:[
+        children: [
             {
-            path: '/',
-            element: <Banner></Banner>
-        },
-        {
-            path: '/login',
-            element: <Login></Login>
-        },
-        {
-            path: '/register',
-            element: <Register></Register>
-        },
-        {
-            path: '/addfood',
-            element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
-        },
-        {
-            path: '/allfoods',
-            element: <AvailableFoods></AvailableFoods>
-        },
-        {
-            path: '/allfoods/:id',
-            element: <SingleFood></SingleFood>,
-            loader: ({params})=> fetch(`http://localhost:5000/allfoods/${params.id}`)
-        },
-        {
-            path: '/managemyfoods',
-            element: <ManageMyFoods></ManageMyFoods>
-        },
-        {
-            path: '/myfoodrequest',
-            element: <MyFoodRequest></MyFoodRequest>
-        },
-        {
-            path: '/managerequest/:id',
-            element: <ManageSingleFood></ManageSingleFood>,
-            loader: ({params})=>fetch(`http://localhost:5000/requests/${params.id}`)
-        }
-    ]
-      },
+                path: '/',
+                element: <Banner></Banner>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
+            },
+            {
+                path: '/addfood',
+                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
+            },
+            {
+                path: '/allfoods',
+                element: <AvailableFoods></AvailableFoods>
+            },
+            {
+                path: '/allfoods/:id',
+                element: <SingleFood></SingleFood>,
+                loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
+            },
+            {
+                path: '/managemyfoods',
+                element: <ManageMyFoods></ManageMyFoods>
+            },
+            {
+                path: '/myfoodrequest',
+                element: <MyFoodRequest></MyFoodRequest>
+            },
+            {
+                path: '/allrequests/:foodId',
+                element: <ManageSingleFood></ManageSingleFood>,
+                loader: ({ params }) => fetch(`http://localhost:5000/allrequests/${params.foodId}`),
+                
+            }
+        ]
+    },
 ])
 
 export default Routes;

@@ -41,11 +41,12 @@ const MyFoodRequest = () => {
 {!loading && (
     <div className="my-24">
         <div >
-            <p className="text-xl font-semibold">Manage your Products</p>
-            <p className="text-gray-600">Products added by you.You can edit, delete or manage status of any item.</p>
+            <p className="text-xl font-semibold">My requests</p>
+            <p className="text-gray-600">Products requested by you.You can <br /> cancel request as long as the item is not delivered.</p>
         </div>
       <Table  className="mt-10" hoverable>
         <Table.Head>
+          <Table.HeadCell>Item</Table.HeadCell>
           <Table.HeadCell>Donor Name</Table.HeadCell>
           <Table.HeadCell>Pickup Location</Table.HeadCell>
           <Table.HeadCell>Expiry Date</Table.HeadCell>
@@ -62,6 +63,7 @@ const MyFoodRequest = () => {
         {
         foods.map(food=> <Table.Body key={food._id} className="divide-y border-b">
           <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+          <Table.Cell> <img className="w-16 h-16 object-cover" src={food.foodImage} alt="" /> </Table.Cell>
             <Table.Cell className="text-black">{food.donatorName} </Table.Cell>
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
               {food.pickupLocation}
