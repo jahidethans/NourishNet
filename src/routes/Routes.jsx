@@ -50,8 +50,9 @@ const Routes = createBrowserRouter([
             element: <MyFoodRequest></MyFoodRequest>
         },
         {
-            path: '/managerequest',
-            element: <ManageSingleFood></ManageSingleFood>
+            path: '/managerequest/:id',
+            element: <ManageSingleFood></ManageSingleFood>,
+            loader: ({params})=>fetch(`http://localhost:5000/requests/${params.id}`)
         }
     ]
       },

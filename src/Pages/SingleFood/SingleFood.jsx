@@ -31,7 +31,7 @@ const SingleFood = () => {
     const foodId = form.foodId.value;
     const donatorEmail = food.email;
     const donatorName = food.donatorName;
-    const userEmail = user.email;
+    const requestorEmail = user.email;
     const requestDate = form.requestDate.value;
     const pickupLocation = form.pickup.value;
     const expiredDate = form.expirydate.value;
@@ -48,7 +48,7 @@ const SingleFood = () => {
 ,foodId
 ,donatorEmail
 ,donatorName
-,userEmail
+,requestorEmail
 ,requestDate
 ,pickupLocation
 ,expiredDate
@@ -202,7 +202,7 @@ status
 
 
 
-                <button type="submit" className="text-white py-2 px-4 uppercase rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Submit</button>
+                <button type="submit" className="text-white py-2 px-4 uppercase rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Request</button>
               </form>
             </Modal.Body>
           </Modal>

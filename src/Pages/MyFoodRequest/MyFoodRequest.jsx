@@ -10,7 +10,7 @@ const MyFoodRequest = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  const url = `http://localhost:5000/ownrequests?userEmail=${user.email}`;
+  const url = `http://localhost:5000/ownrequests?requestorEmail=${user.email}`;
   
   useEffect(() => {
     const fetchData = async () => {
