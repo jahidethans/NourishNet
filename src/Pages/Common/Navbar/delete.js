@@ -1,67 +1,80 @@
-import { useEffect, useState } from "react";
-import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
+import  { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
-const AvailableFoods = () => {
-  const [foods, setFoods] = useState([]);
-  const [sortByExpiryDate, setSortByExpiryDate] = useState(false);
-  const [searchText, setSearchText] = useState('');
+import { Table } from "flowbite-react";
+
+const ManageMyFoods = () => {
+  const { user } = useContext(AuthContext);
+  const [food, setFood] = useState([]);
+
+  const url = `http://localhost:5000/managefoods?email=${user.email}`;
 
   useEffect(() => {
-    fetch('http://localhost:5000/allfoods')
-      .then(res => res.json())
-      .then(data => setFoods(data))
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setFood(data));
   }, []);
 
-  const handleSortByExpiryDate = () => {
-    setSortByExpiryDate(!sortByExpiryDate);
-    const sortedFoods = [...foods].sort((a, b) => {
-      const dateA = new Date(a.expiredDate);
-      const dateB = new Date(b.expiredDate);
-      return sortByExpiryDate ? dateA - dateB : dateB - dateA;
-    });
-    setFoods(sortedFoods);
-  };
+ 
 
-  const handleSearch = () => {
-    // Filter the foods based on the search text
-    const filteredFoods = foods.filter(food => 
-      food.foodName.toLowerCase().includes(searchText.toLowerCase())
-    );
-    // Update the foods array with the filtered results
-    setFoods(filteredFoods);
-  };
 
-  console.log(foods);
+
+ 
 
   return (
     <div>
-      <div className="flex justify-between items-center p-4">
-        <div>
-          <input
-            type="text"
-            placeholder="Search by food name"
-            value={searchText}
-            onChange={e => setSearchText(e.target.value)}
-            className="p-3 border rounded-md"
-          />
-          <button onClick={handleSearch} className="p-3 border rounded-md">Search</button>
-        </div>
-        <div>
-          <button onClick={handleSortByExpiryDate}>
-            Sort by expiry date: {sortByExpiryDate ? <AiOutlineSortAscending className='w-10'></AiOutlineSortAscending> : <AiOutlineSortDescending></AiOutlineSortDescending>}
-          </button>
-        </div>
-      </div>
-
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {foods.map((food) => (
-          <div key={food._id}>
-            {/* Your card and food display code */}
-          </div>
-        ))}
-      </div>
+      <Table hoverable>
+      <Table.Head>
+        <Table.HeadCell>Product name</Table.HeadCell>
+        <Table.HeadCell>Color</Table.HeadCell>
+        <Table.HeadCell>Category</Table.HeadCell>
+        <Table.HeadCell>Price</Table.HeadCell>
+        <Table.HeadCell>
+          <span className="sr-only">Edit</span>
+        </Table.HeadCell>
+      </Table.Head>
+      <Table.Body className="divide-y">
+        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+            {'Apple MacBook Pro 17"'}
+          </Table.Cell>
+          <Table.Cell>Sliver</Table.Cell>
+          <Table.Cell>Laptop</Table.Cell>
+          <Table.Cell>$2999</Table.Cell>
+          <Table.Cell>
+            <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+              Edit
+            </a>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+            Microsoft Surface Pro
+          </Table.Cell>
+          <Table.Cell>White</Table.Cell>
+          <Table.Cell>Laptop PC</Table.Cell>
+          <Table.Cell>$1999</Table.Cell>
+          <Table.Cell>
+            <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+              Edit
+            </a>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">Magic Mouse 2</Table.Cell>
+          <Table.Cell>Black</Table.Cell>
+          <Table.Cell>Accessories</Table.Cell>
+          <Table.Cell>$99</Table.Cell>
+          <Table.Cell>
+            <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+              Edit
+            </a>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
     </div>
   );
 };
 
-export default AvailableFoods;
+export default ManageMyFoods;
