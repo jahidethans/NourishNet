@@ -1,16 +1,17 @@
 import  { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { AiOutlineDelete } from "react-icons/ai";
 import { Table } from "flowbite-react";
-import { Link } from "react-router-dom";
 
-const ManageMyFoods = () => {
-  const { user } = useContext(AuthContext);
+
+
+const MyFoodRequest = () => {
+
+    const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const url = `http://localhost:5000/managefoods?email=${user.email}`;
-
+  
+  const url = `http://localhost:5000/ownrequests?userEmail=${user.email}`;
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,19 +25,13 @@ const ManageMyFoods = () => {
       }
       setLoading(false);
     };
-  
+    
     fetchData();
   }, []);
-
-
-
-
-
+  
  
-
-  return (
-
-    <div className="my-24">
+    return (
+        <div className="my-24">
     {loading && (
       <div className="flex items-center justify-center h-screen">
         <div className="loading loading-infinity text-secondary w-[8rem]">Loading</div>
@@ -51,44 +46,38 @@ const ManageMyFoods = () => {
         </div>
       <Table  className="mt-10" hoverable>
         <Table.Head>
-          <Table.HeadCell>food image</Table.HeadCell>
-          <Table.HeadCell>food name</Table.HeadCell>
-          <Table.HeadCell>quantity</Table.HeadCell>
+          <Table.HeadCell>Donor Name</Table.HeadCell>
+          <Table.HeadCell>Pickup Location</Table.HeadCell>
+          <Table.HeadCell>Expiry Date</Table.HeadCell>
+          <Table.HeadCell>Request Date</Table.HeadCell>
+          <Table.HeadCell>Donation Amount</Table.HeadCell>
+          <Table.HeadCell>Status</Table.HeadCell>
+          
           
           <Table.HeadCell>
-            <span className="sr-only">Update</span>
-          </Table.HeadCell>
-          <Table.HeadCell>
-            <span className="sr-only">Delete</span>
-          </Table.HeadCell>
-          <Table.HeadCell>
-            <span className="sr-only">Manage</span>
+            <span className="sr-only">Cancel</span>
           </Table.HeadCell>
         </Table.Head>
 
         {
         foods.map(food=> <Table.Body key={food._id} className="divide-y border-b">
           <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-            <Table.Cell> <img className="w-16 h-16" src={food.foodImage} alt="" /> </Table.Cell>
+            <Table.Cell className="text-black">{food.donatorName} </Table.Cell>
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-              {food.foodName}
+              {food.pickupLocation}
             </Table.Cell>
-            <Table.Cell>{food.foodQuantity}</Table.Cell>
+            <Table.Cell>{food.expiredDate}</Table.Cell>
             
             <Table.Cell>
-              <button href="#" className="font-medium text-white hover:underline dark:text-cyan-500">
-              Update
-              </button>
+              {food.requestDate}
+            </Table.Cell>
+            <Table.Cell>
+            {food.donate}
             </Table.Cell>
             <Table.Cell>
               <button href="#" className="font-medium text-white hover:underline dark:text-cyan-500">
-              <AiOutlineDelete className="w-5 h-5 hover:text-black"></AiOutlineDelete>
+              {food.status}
               </button>
-            </Table.Cell>
-            <Table.Cell>
-              <Link to="/managerequest" className="p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md">
-              Manage
-              </Link>
             </Table.Cell>
           </Table.Row>
           
@@ -98,7 +87,7 @@ const ManageMyFoods = () => {
     </div>
     )}
     </div>
-  );
+    );
 };
 
-export default ManageMyFoods;
+export default MyFoodRequest;

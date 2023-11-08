@@ -44,7 +44,7 @@ const Navbar = () => {
                     user?.email ? <><Link to='/allfoods'>Available Foods</Link>
                     <Link to='/addfood'>Add Food</Link>
                     <Link to='/managemyfoods'>Manage My Foods</Link>
-                    <Link to=''>My Food Request</Link></> :
+                    <Link to='/myfoodrequest'>My Food Request</Link></> :
                     <Link to='/allfoods'>Available Foods</Link>
                 }
             </ul>
