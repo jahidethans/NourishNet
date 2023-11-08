@@ -40,7 +40,7 @@ const Navbar = () => {
             </div>
             <ul className='hidden md:flex'>
                 <Link to='/'>Home</Link>
-                <Link to='/'>Available Foods</Link>
+                <Link to='/allfoods'>Available Foods</Link>
                 <Link to='/addfood'>Add Food</Link>
                 <Link to=''>Manage My Foods</Link>
                 <Link to=''>My Food Request</Link>
