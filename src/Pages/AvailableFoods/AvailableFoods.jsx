@@ -1,14 +1,44 @@
 import { useEffect, useState } from "react";
+import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 
 const AvailableFoods = () => {
 
   const [foods, setFoods] = useState([]);
+  const [sortByExpiryDate, setSortByExpiryDate] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:5000/allfoods')
       .then(res => res.json())
       .then(data => setFoods(data))
-  }, [])
+  }, []);
+
+  const handleSortByExpiryDate = () => {
+    // Toggle the sorting order
+    setSortByExpiryDate(!sortByExpiryDate);
+
+    // Sort the foods array based on the expiry date
+    const sortedFoods = [...foods].sort((a, b) => {
+      const dateA = new Date(a.expiredDate);
+      const dateB = new Date(b.expiredDate);
+      return sortByExpiryDate ? dateA - dateB : dateB - dateA;
+    });
+
+    setFoods(sortedFoods);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value
+    // Filter the foods based on the search text
+    const filteredFoods = foods.filter(food => 
+      food.foodName.toLowerCase().includes(searchText.toLowerCase())
+    );
+    // Update the foods array with the filtered results
+    setFoods(filteredFoods);
+  };
+
+
+  
 
   console.log(foods);
 
@@ -16,22 +46,27 @@ const AvailableFoods = () => {
     <div>
 
       <div className="flex justify-between items-center p-4">
-        <div className="">
-          <form>
-            <label htmlFor="foods">Choose a category:</label>
-            <select name="foods" id="foods">
-              <option value="volvo">Fresh Vegetables</option>
-              <option value="saab">Canned Goods</option>
-              <option value="opel">Bakery Items</option>
-              <option value="audi">Cereals</option>
-            </select>
-            <br />
-            <input className="p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md" type="submit" defaultValue="Submit" />
-          </form>
+      <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search by food name"
+            name='search'
+            // value={searchText}
+            // onChange={e => setSearchText(e.target.value)}
+            className="p-3 border rounded-md"
+          />
+          <button  className="p-3 border rounded-md">Search</button>
+        </form>
+        <div>
+          <button onClick={handleSortByExpiryDate}>
+            Sort by expiry date: {sortByExpiryDate ? <AiOutlineSortAscending className='w-10'></AiOutlineSortAscending> : <AiOutlineSortDescending></AiOutlineSortDescending>}
+          </button>
         </div>
 
         <div>
-          <button>Sort by expiry date</button>
+        <button onClick={handleSortByExpiryDate}>
+          Sort by expiry date: {sortByExpiryDate ? <AiOutlineSortAscending className='w-10'></AiOutlineSortAscending> : <AiOutlineSortDescending></AiOutlineSortDescending>}
+        </button>
         </div>
       </div>
 

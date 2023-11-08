@@ -1,59 +1,67 @@
-import { BsPerson } from 'react-icons/bs';
-import { AiOutlineClose } from 'react-icons/ai';
-import { HiOutlineMenuAlt4 } from 'react-icons/hi';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 
-const Navbar = () => {
-    const location = useLocation();
+const AvailableFoods = () => {
+  const [foods, setFoods] = useState([]);
+  const [sortByExpiryDate, setSortByExpiryDate] = useState(false);
+  const [searchText, setSearchText] = useState('');
 
-    // Determine if the navbar should be static or absolute based on the route
-    const isStaticNavbar = location.pathname !== '/';
+  useEffect(() => {
+    fetch('http://localhost:5000/allfoods')
+      .then(res => res.json())
+      .then(data => setFoods(data))
+  }, []);
 
-    const [nav, setNav] = useState(false);
-    const [logo, setLogo] = useState(false);
+  const handleSortByExpiryDate = () => {
+    setSortByExpiryDate(!sortByExpiryDate);
+    const sortedFoods = [...foods].sort((a, b) => {
+      const dateA = new Date(a.expiredDate);
+      const dateB = new Date(b.expiredDate);
+      return sortByExpiryDate ? dateA - dateB : dateB - dateA;
+    });
+    setFoods(sortedFoods);
+  };
 
-    const handleNav = () => {
-        setNav(!nav);
-        setLogo(!logo);
-    }
-
-    return (
-        <div className={`flex w-full justify-between items-center h-20 px-4 ${isStaticNavbar ? 'static-navbar' : 'absolute-navbar'} z-10 text-white`}>
-            <div>
-                <h1 className={logo ? 'hidden' : 'block'}>NOURISHNET.</h1>
-            </div>
-            <ul className='hidden md:flex'>
-                <li>Home</li>
-                <li>Available Foods</li>
-                <li>Add Food</li>
-                <li>Manage My Foods</li>
-                <li>My Food Request</li>
-            </ul>
-
-            <div className='hidden md:flex'>
-                <Link to='/login'><BsPerson size={20}></BsPerson></Link>
-            </div>
-
-            <div className='md:hidden z-20' onClick={handleNav}>
-                {nav ? <AiOutlineClose size={20}></AiOutlineClose> : <HiOutlineMenuAlt4 size={20}></HiOutlineMenuAlt4>}
-            </div>
-
-            {/* Mobile menu dropdown */}
-            <div className={nav ? 'absolute left-0 top-0 w-full bg-gray-100/90 px-4 py-7 flex flex-col z-10' : 'absolute left-[-100%] top-0 w-full bg-gray-100/90 px-4 py-7 flex flex-col'}>
-                <ul className='text-black'>
-                    <h1>NOURISHNET.</h1>
-                    <li className='border-b border-black'>Home</li>
-                    <li className='border-b border-black'>Available Foods</li>
-                    <li className='border-b border-black'>Add Food</li>
-                    <li className='border-b border-black'>Manage My Foods</li>
-                    <li className='border-b border-black'>My Food Request</li>
-                    <div className='flex'>
-                        <Link to='/login' className='w-full my-4 p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md'>Sign in</Link>
-                    </div>
-                </ul>
-            </div>
-        </div>
+  const handleSearch = () => {
+    // Filter the foods based on the search text
+    const filteredFoods = foods.filter(food => 
+      food.foodName.toLowerCase().includes(searchText.toLowerCase())
     );
+    // Update the foods array with the filtered results
+    setFoods(filteredFoods);
+  };
+
+  console.log(foods);
+
+  return (
+    <div>
+      <div className="flex justify-between items-center p-4">
+        <div>
+          <input
+            type="text"
+            placeholder="Search by food name"
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
+            className="p-3 border rounded-md"
+          />
+          <button onClick={handleSearch} className="p-3 border rounded-md">Search</button>
+        </div>
+        <div>
+          <button onClick={handleSortByExpiryDate}>
+            Sort by expiry date: {sortByExpiryDate ? <AiOutlineSortAscending className='w-10'></AiOutlineSortAscending> : <AiOutlineSortDescending></AiOutlineSortDescending>}
+          </button>
+        </div>
+      </div>
+
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {foods.map((food) => (
+          <div key={food._id}>
+            {/* Your card and food display code */}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
-export default Navbar;
+export default AvailableFoods;
