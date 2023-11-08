@@ -70,7 +70,7 @@ status
   .then(data=>{
       console.log(data);
       if(data.insertedId){
-        toast.success('Food added successfully')
+        toast.success('Request added successfully')
       }
   })
 
