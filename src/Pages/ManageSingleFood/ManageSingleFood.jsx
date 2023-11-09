@@ -2,28 +2,20 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useLoaderData } from "react-router-dom";
 import { Table } from "flowbite-react";
+import StatusChanger from "./StatusChanger";
 
 
 const ManageSingleFood = () => {
   const { user } = useContext(AuthContext);
   const food = useLoaderData();
-  const [updatedFoodList, setUpdatedFoodList] = useState([...food]);
+  
+ 
+  
 
-  const handleStatusChange = (event, index) => {
-    event.preventDefault();
 
-    const selectedStatus = event.target.status.value;
-    
-    // Create a copy of the updatedFoodList
-    const updatedList = [...updatedFoodList];
-    
-    // Update the status for the selected food item
-    updatedList[index].status = selectedStatus;
 
-    // Update the state with the modified list
-    setUpdatedFoodList(updatedList);
-  }
-  console.log(updatedFoodList);
+
+
 
   if (!food || food.length === 0) {
     return <section className="flex items-center h-full sm:p-16 dark:bg-gray-900 dark:text-gray-100">
@@ -58,32 +50,9 @@ const ManageSingleFood = () => {
         </Table.Head>
 
         {
-          food.map(eachFood => <Table.Body key={eachFood._id} className="divide-y border-b">
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell> <img className="w-16 h-16" src={eachFood.requestorImage} alt="" /> </Table.Cell>
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {eachFood.requestorName}
-              </Table.Cell>
-              <Table.Cell>{eachFood.requestorEmail}</Table.Cell>
-              <Table.Cell>{eachFood.requestDate}</Table.Cell>
-              <Table.Cell>
-                <form onSubmit={(event) => handleStatusChange(event, index)}>
-                  <select
-                    name="status"
-                    defaultValue={eachFood.status}
-                    className="py-2 px-2 rounded-md w-2/3 focus:outline-none focus:ring focus:border-secondary focus:bg-white mb-4"
-                  >
-                    <option value="available">Available</option>
-                    <option value="delivered">Delivered</option>
-                  </select>
-                  <button type="submit" className="px-3 py-2 bg-primary text-black rounded-md">
-                    Change
-                  </button>
-                </form>
-              </Table.Cell>
-            </Table.Row>
-
-          </Table.Body>)}
+          food.map(eachFood => <StatusChanger 
+            key={eachFood._id}
+           eachFood={eachFood}></StatusChanger>)}
       </Table>
 
     </div>
