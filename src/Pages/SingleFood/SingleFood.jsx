@@ -31,7 +31,9 @@ const SingleFood = () => {
     const foodId = form.foodId.value;
     const donatorEmail = food.email;
     const donatorName = food.donatorName;
+    const requestorName = user.displayName;
     const requestorEmail = user.email;
+    const requestorImage = user.photoURL;
     const requestDate = form.requestDate.value;
     const pickupLocation = form.pickup.value;
     const expiredDate = form.expirydate.value;
@@ -46,9 +48,11 @@ const SingleFood = () => {
       foodName
 ,foodImage
 ,foodId
+,requestorName
 ,donatorEmail
 ,donatorName
 ,requestorEmail
+,requestorImage
 ,requestDate
 ,pickupLocation
 ,expiredDate
