@@ -113,7 +113,7 @@ const MyFoodRequest = () => {
               <p>{food.status}</p>
             </Table.Cell>
             <Table.Cell>
-              <button on onClick={()=> handleDelete(food._id)} className="font-medium text-white hover:underline dark:text-cyan-500">
+              <button onClick={()=> handleDelete(food._id)} className="font-medium text-white hover:underline dark:text-cyan-500 disabled:text-red-600"  disabled={food.status === "delivered"}>
               <AiOutlineDelete className="text-xl"></AiOutlineDelete>
               </button>
             </Table.Cell>
