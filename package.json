@@ -20,7 +20,9 @@
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.18.0",
     "react-table": "^7.8.0",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.9.0",
+    "sweetalert2-react-content": "^5.0.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

@@ -1,6 +1,8 @@
 import  { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Table } from "flowbite-react";
+import { AiOutlineDelete } from "react-icons/ai";
+import Swal from "sweetalert2";
 
 
 
@@ -28,6 +30,37 @@ const MyFoodRequest = () => {
     
     fetchData();
   }, []);
+  console.log(foods);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed the deletion
+        fetch(`http://localhost:5000/allrequests/${id}`, {
+          method: "DELETE"
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // Check if the deletion was successful and show a success message
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your request has been deleted.", "success");
+              const remaining = foods.filter(food=> food._id !== id);
+              setFoods(remaining);
+            } else {
+              Swal.fire("Error", "Failed to delete the request.", "error");
+            }
+          });
+      }
+    });
+  };
   
  
     return (
@@ -77,8 +110,11 @@ const MyFoodRequest = () => {
             {food.donate}
             </Table.Cell>
             <Table.Cell>
-              <button href="#" className="font-medium text-white hover:underline dark:text-cyan-500">
-              {food.status}
+              <p>{food.status}</p>
+            </Table.Cell>
+            <Table.Cell>
+              <button on onClick={()=> handleDelete(food._id)} className="font-medium text-white hover:underline dark:text-cyan-500">
+              <AiOutlineDelete className="text-xl"></AiOutlineDelete>
               </button>
             </Table.Cell>
           </Table.Row>
