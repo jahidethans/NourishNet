@@ -72,7 +72,7 @@ const AvailableFoods = () => {
      {
   foods.map((food) => (
     <div key={food._id}>
-      <card className="max-w-sm flex gap-2">
+      <div className="max-w-sm flex gap-2">
     
         <img className="w-52 h-80 object-cover " src={food.foodImage} alt={food.foodName} />
 
@@ -101,7 +101,7 @@ const AvailableFoods = () => {
         </div>
         <Link to={`/allfoods/${food._id}`}><button>View Details</button></Link>
         </div>
-      </card>
+      </div>
     </div>
   ))
 }

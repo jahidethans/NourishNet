@@ -3,6 +3,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext);
@@ -26,10 +27,50 @@ const ManageMyFoods = () => {
     };
   
     fetchData();
-  }, []);
+  }, [url]);
 
 
 console.log(foods);
+
+const handleDelete = id =>{
+      
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+
+          fetch(`http://localhost:5000/allfoods/${id}`,{
+            method: 'DELETE'
+          })
+          .then(res=>res.json())
+          .then(data =>{
+            if(data.deletedCount > 0){
+              
+              // Filter out the deleted item from the foods array
+          const remainingFoods = foods.filter(food => food._id !== id);
+          
+          // Update the state with the remaining items
+          setFoods(remainingFoods);
+
+
+
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your donated food has been deleted.",
+                icon: "success"
+              });
+            }
+          })
+        }
+      });
+}
 
 
  
@@ -81,7 +122,7 @@ console.log(foods);
               </button>
             </Table.Cell>
             <Table.Cell>
-              <button href="#" className="font-medium text-white hover:underline dark:text-cyan-500">
+              <button onClick={()=>handleDelete(food._id)} className="font-medium text-white hover:underline dark:text-cyan-500">
               <AiOutlineDelete className="w-5 h-5 hover:text-black"></AiOutlineDelete>
               </button>
             </Table.Cell>
