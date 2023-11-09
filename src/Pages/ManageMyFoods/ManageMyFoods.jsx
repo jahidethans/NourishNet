@@ -4,6 +4,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext);
@@ -78,6 +79,11 @@ const handleDelete = id =>{
   return (
 
     <div className="my-24">
+      <Helmet>
+                <meta charSet="utf-8" />
+                <title>Manage my food</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
     {loading && (
       <div className="flex items-center justify-center h-screen">
         <div className="loading loading-infinity text-secondary w-[8rem]">Loading</div>

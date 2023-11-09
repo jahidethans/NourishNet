@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -45,6 +46,11 @@ const AvailableFoods = () => {
 
   return (
     <div>
+      <Helmet>
+                <meta charSet="utf-8" />
+                <title>Nourishnet-All foods</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
 
       <div className="flex justify-between items-center p-4">
       <form onSubmit={handleSearch}>

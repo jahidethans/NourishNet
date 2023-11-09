@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import SocialLogin from "../Common/SocialLogin/SocialLogin";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 
 const Register = () => {
@@ -46,6 +47,11 @@ const Register = () => {
 
     return (
         <div className="bg-gray-800">
+          <Helmet>
+                <meta charSet="utf-8" />
+                <title>Register</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
         <div className="p-8 lg:w-1/2 mx-auto">
           <div className="rounded-t-lg p-8">
             <p className="text-center text-sm text-gray-400 font-light">Sign up with</p>

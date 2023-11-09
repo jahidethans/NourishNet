@@ -3,6 +3,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { Table } from "flowbite-react";
 import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 
 
@@ -65,6 +66,11 @@ const MyFoodRequest = () => {
  
     return (
         <div className="my-24">
+          <Helmet>
+                <meta charSet="utf-8" />
+                <title>My food requests</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
     {loading && (
       <div className="flex items-center justify-center h-screen">
         <div className="loading loading-infinity text-secondary w-[8rem]">Loading</div>

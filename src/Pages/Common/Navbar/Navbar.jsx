@@ -116,7 +116,7 @@ const Navbar = () => {
 
             {/* Mobile menu dropdown */}
             <div className={nav ? 'absolute left-0 top-0 w-full bg-gray-100/90 px-4 py-7 flex flex-col z-10' : 'absolute left-[-100%] top-0 w-full bg-gray-100/90 px-4 py-7 flex flex-col '}>
-                <ul className='text-black'>
+                <ul className='text-black flex flex-col space-y-3'>
                     <h1>NOURISHNET.</h1>
                     {
                         user?.email ? <div className='py-4 flex flex-col items-center space-y-3'>
@@ -129,11 +129,14 @@ const Navbar = () => {
                         <p className='text-sm'>{user.email}</p>
                     </div> : ''
                     }
-                    <li className='border-b border-black '>Home</li>
-                    <li className='border-b border-black'>Available Foods</li>
-                    <li className='border-b border-black'>Add Food</li>
-                    <li className='border-b border-black'>Manage My Foods</li>
-                    <li className='border-b border-black'>My Food Request</li>
+                    <Link to='/' className='border-b border-black pb-2'>Home</Link>
+                    {
+                    user?.email ? <><Link to='/allfoods' className='border-b border-black pb-2'>Available Foods</Link>
+                    <Link to='/addfood' className='border-b border-black pb-2'>Add Food</Link>
+                    <Link to='/managemyfoods' className='border-b border-black pb-2'>Manage My Foods</Link>
+                    <Link to='/myfoodrequest' className='border-b border-black pb-2'>My Food Request</Link></> :
+                    <Link to='/allfoods' className='border-b border-black pb-2'>Available Foods</Link>
+                }
                     <div className='flex'>
                         {
                             user?.email ? <button onClick={handleLogout} className='w-full my-4 p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md'>Sign Out</button> : <Link to='/login' className='w-full my-4 p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md'>Sign in</Link>
