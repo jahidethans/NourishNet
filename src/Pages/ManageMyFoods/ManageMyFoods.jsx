@@ -117,9 +117,9 @@ const handleDelete = id =>{
             <Table.Cell>{food.foodQuantity}</Table.Cell>
             
             <Table.Cell>
-              <button href="#" className="font-medium text-white hover:underline dark:text-cyan-500">
+              <Link to={`/updatefood/${food._id}`} className="font-medium text-white hover:underline dark:text-cyan-500 p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] rounded-md">
               Update
-              </button>
+              </Link>
             </Table.Cell>
             <Table.Cell>
               <button onClick={()=>handleDelete(food._id)} className="font-medium text-white hover:underline dark:text-cyan-500">
