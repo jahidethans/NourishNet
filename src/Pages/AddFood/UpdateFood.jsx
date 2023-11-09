@@ -34,7 +34,7 @@ const UpdateFood = () => {
         console.log(updatedFood);
 
         // send data to server
-        fetch(`http://localhost:5000/allfoods/${food._id}`,{
+        fetch(`https://nourish-net-server.vercel.app/allfoods/${food._id}`,{
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

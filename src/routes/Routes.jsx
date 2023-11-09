@@ -54,7 +54,7 @@ const Routes = createBrowserRouter([
             {
                 path: '/allfoods/:id',
                 element: <PrivateRoute><SingleFood></SingleFood></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
+                loader: ({ params }) => fetch(`https://nourish-net-server.vercel.app/allfoods/${params.id}`)
             },
             {
                 path: '/managemyfoods',
@@ -67,13 +67,13 @@ const Routes = createBrowserRouter([
             {
                 path: '/allrequests/foods/:foodId',
                 element: <PrivateRoute><ManageSingleFood></ManageSingleFood></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/allrequests/foods/${params.foodId}`),
+                loader: ({ params }) => fetch(`https://nourish-net-server.vercel.app/allrequests/foods/${params.foodId}`),
                 
             },
             {
                 path: '/updatefood/:id',
                 element: <UpdateFood></UpdateFood>,
-                loader: ({params})=>fetch(`http://localhost:5000/allfoods/${params.id}`)
+                loader: ({params})=>fetch(`https://nourish-net-server.vercel.app/allfoods/${params.id}`)
             }
         ]
     },

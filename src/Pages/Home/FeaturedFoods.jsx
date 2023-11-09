@@ -5,7 +5,7 @@ const FeaturedFoods = () => {
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allfoods`)
+    fetch(`https://nourish-net-server.vercel.app/allfoods`)
       .then((res) => res.json())
       .then((data) => setFoods(data));
   }, []);

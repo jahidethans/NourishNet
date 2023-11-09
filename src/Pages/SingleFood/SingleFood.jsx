@@ -63,7 +63,7 @@ status
     console.log(requestedFood);
 
     // send data to server
-    fetch('http://localhost:5000/allrequests',{
+    fetch('https://nourish-net-server.vercel.app/allrequests',{
       method: 'POST',
       headers: {
           'content-type': 'application/json'

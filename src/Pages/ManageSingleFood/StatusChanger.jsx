@@ -49,7 +49,7 @@ const StatusChanger = ({eachFood}) => {
 
 
         const handleChangeUpdate = () =>{
-            fetch(`http://localhost:5000/allrequests/${id}`, {
+            fetch(`https://nourish-net-server.vercel.app/allrequests/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'

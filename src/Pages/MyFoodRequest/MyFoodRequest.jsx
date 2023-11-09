@@ -13,7 +13,7 @@ const MyFoodRequest = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  const url = `http://localhost:5000/ownrequests?requestorEmail=${user.email}`;
+  const url = `https://nourish-net-server.vercel.app/ownrequests?requestorEmail=${user.email}`;
   
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +45,7 @@ const MyFoodRequest = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // User confirmed the deletion
-        fetch(`http://localhost:5000/allrequests/${id}`, {
+        fetch(`https://nourish-net-server.vercel.app/allrequests/${id}`, {
           method: "DELETE"
         })
           .then((res) => res.json())

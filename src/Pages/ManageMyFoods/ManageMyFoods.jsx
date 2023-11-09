@@ -11,7 +11,7 @@ const ManageMyFoods = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const url = `http://localhost:5000/managefoods?email=${user.email}`;
+  const url = `https://nourish-net-server.vercel.app/managefoods?email=${user.email}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +47,7 @@ const handleDelete = id =>{
         if (result.isConfirmed) {
           
 
-          fetch(`http://localhost:5000/allfoods/${id}`,{
+          fetch(`https://nourish-net-server.vercel.app/allfoods/${id}`,{
             method: 'DELETE'
           })
           .then(res=>res.json())
